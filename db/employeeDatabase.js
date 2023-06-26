@@ -5,8 +5,10 @@ class EmployeeDatabase extends Database {
         super(options)
     }
 
-    options() {
-        console.log(this.options)
+    getDepartments() {
+        return new Promise((res, rej) => {
+            this.db.query('SELECT')
+        })
     }
 }
 
