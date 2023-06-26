@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
 class Database {
     constructor (options) {
@@ -6,16 +6,9 @@ class Database {
         this.db = null
     }
 
-    validate() {
-        const { host, user, password, database } = this.options
-        if (!host || !user || !password || database)
-            throw new Error('Invalid database options')
-
-        return;
-    }
-
     connect() {
-        this.validate();
+
+        if (this.options) {
 
         const { host, user, password, database } = this.options
         
@@ -26,12 +19,10 @@ class Database {
                 password: password,
                 database: database
             },
-            console.log("Connected to employee_db")
-        );
-    }
-
-    disconnect() {
-        this.db.disconnect();
+            console.log("Connected to employee_db"))
+        } else {
+            throw new Error ("There was an error connection to the database, please ensure credentials are correct!")
+        }
     }
 }
 

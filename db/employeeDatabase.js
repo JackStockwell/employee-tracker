@@ -10,4 +10,4 @@ class EmployeeDatabase extends Database {
     }
 }
 
-module.exports = { EmployeeDatabase };
+module.exports = EmployeeDatabase;
