@@ -1,2 +1,5 @@
 INSERT INTO department (name)
-VALUES ("")
+VALUES  ("North"),
+        ("East"),
+        ("South"),
+        ("West");

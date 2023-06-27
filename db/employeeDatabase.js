@@ -1,15 +1,43 @@
-const Database = require('./database.js');
+const db = require('./database.js');
 
-class EmployeeDatabase extends Database {
+class Departments extends db {
     constructor(options) {
         super(options)
     }
 
-    getDepartments() {
+    getDepartments() {       
         return new Promise((res, rej) => {
-            this.db.query('SELECT')
+            const sql = "SELECT * FROM department"
+            this.db.query(sql, (err, result) => {
+                if (err) {
+                    rej(err)
+                    return
+                }
+                res(result);
+            });
         })
     }
 }
 
-module.exports = EmployeeDatabase;
+class Employees extends db {
+    constructor(options) {
+        super(options)
+    }
+
+    getEmployees() {
+        return new Promise((res, rej) => {
+            const sql = "SELECT CONCAT('first_name', 'last_name'), role_id FROM employee_db"
+            this.db.query(sql, (err, result) => {
+                if (err) {
+                    rej(err)
+                    return
+                }
+                res(result)
+            })
+        })
+    }
+}
+
+module.exports = Database = { 
+    Departments,
+}
