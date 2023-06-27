@@ -1,9 +1,10 @@
-DELETE IF EXISTS employee_db;
+DROP DATABASE IF EXISTS employee_db;
 CREATE DATABASE employee_db;
+DROP TABLE departmenmt;
 
 USE employee_db;
 
-CREATE TABLE departmenmt (
+CREATE TABLE department (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL
 );
@@ -12,9 +13,9 @@ CREATE TABLE role (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30),
     salary DECIMAL,
-    departmenmt_id INT,
-    FOREIGN KEY (departmenmt_id)
-    REFERENCES departmenmt(id)
+    department_id INT,
+    FOREIGN KEY (department_id)
+    REFERENCES department(id)
     ON DELETE SET NULL
 );
 
