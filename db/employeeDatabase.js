@@ -1,13 +1,13 @@
-const db = require('./database.js');
+const DatabaseParent = require('./database.js');
 
-class Departments extends db {
+class Departments extends DatabaseParent {
     constructor(options) {
-        super(options)
+        super(options);
     }
 
     getDepartments() {       
         return new Promise((res, rej) => {
-            const sql = "SELECT * FROM department"
+            const sql = "SELECT * FROM department;"
             this.db.query(sql, (err, result) => {
                 if (err) {
                     rej(err)
@@ -19,14 +19,14 @@ class Departments extends db {
     }
 }
 
-class Employees extends db {
+class Employees extends DatabaseParent {
     constructor(options) {
         super(options)
     }
 
     getEmployees() {
         return new Promise((res, rej) => {
-            const sql = "SELECT CONCAT('first_name', 'last_name'), role_id FROM employee_db"
+            const sql = "SELECT CONCAT('first_name', 'last_name'), FROM employee_db"
             this.db.query(sql, (err, result) => {
                 if (err) {
                     rej(err)

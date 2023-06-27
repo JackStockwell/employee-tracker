@@ -1,6 +1,7 @@
 const CLI = require('./lib/cli.js');
+const Database = require('./db/database.js')
 
 const cli = new CLI();
 
-cli.connect();
+Database.connect();
 cli.run();
