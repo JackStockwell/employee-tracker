@@ -2,18 +2,11 @@ class EmployeeDB {
     constructor(db) {
         this.db = db;
     }
-}
 
-class Departments extends EmployeeDB {
-    constructor(db) {
-        super(db);
-    }
-
-    retrieve() {    
+    retrieveDepartment() {    
         const sql = "SELECT * FROM department;"  
 
         return new Promise((resolve, reject) => {
-
             this.db.query(sql, (err, result) => {
                 if (err) {
                     reject(err)
@@ -23,16 +16,25 @@ class Departments extends EmployeeDB {
             });
         })
     }
-}
 
-class Employees extends EmployeeDB {
-    constructor(db) {
-        super(db);
+    addDepartment(department) {
+        const SQL = 'INSERT INTO department SET ?'
+        console.log(department)
+        return new Promise((resolve, reject) => {
+            this.db.query(SQL, {name: department.departmentName}, (err, result) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve('New department added successfully!')
+                }
+            })
+        })
     }
 
-    retrieve() {
+    retrieveEmployee() {
+        const sql = "SELECT CONCAT('first_name', 'last_name') AS Employee FROM employee"
+        
         return new Promise((res, rej) => {
-            const sql = "SELECT CONCAT('first_name', 'last_name'), FROM employee_db"
             this.db.query(sql, (err, result) => {
                 if (err) {
                     rej(err)
@@ -42,9 +44,35 @@ class Employees extends EmployeeDB {
             })
         })
     }
+
+    retrieveRole() {
+        const sql = "SELECT * FROM role"
+
+        return new Promise((res, rej) => {
+            this.db.query(sql, (err, result) => {
+                if (err) {
+                    rej(err)
+                    return
+                }
+                res(result)
+            })
+        })
+    }
+
+    addRole(role) {
+        const SQL = 'INSERT INTO role SET ?'
+        return new Promise((resolve, reject) => {
+            this.db.query(SQL, {title: role.name, salary: role.salary, department_id: role.id }, (err, result) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve('New role added successfully!')
+                }
+            })
+        })
+    }
 }
 
 module.exports = Database = { 
-    Departments,
-    Employees 
+    EmployeeDB
 };
