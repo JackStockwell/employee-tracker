@@ -17,7 +17,7 @@ class EmployeeDB {
         })
     }
 
-    newDepartment(department) {
+    addDepartment(department) {
         const SQL = 'INSERT INTO department SET ?'
         console.log(department)
         return new Promise((resolve, reject) => {
@@ -55,6 +55,19 @@ class EmployeeDB {
                     return
                 }
                 res(result)
+            })
+        })
+    }
+
+    addRole(role) {
+        const SQL = 'INSERT INTO role SET ?'
+        return new Promise((resolve, reject) => {
+            this.db.query(SQL, {title: role.name, salary: role.salary, department_id: role.id }, (err, result) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve('New role added successfully!')
+                }
             })
         })
     }
