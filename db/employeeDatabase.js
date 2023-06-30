@@ -1,12 +1,20 @@
+const { mainMenu } = require("../lib/questions");
+
 class EmployeeDB {
     constructor(db) {
         this.db = db;
     }
 
-    retrieveDepartment() {    
+    render(data) {
+        console.log('\n')
+        console.table(data)
+        console.log('\n')
+    } 
+
+    retrieveDepartments = async () => {    
         const sql = "SELECT * FROM department;"  
 
-        return new Promise((resolve, reject) => {
+        const departments = await new Promise((resolve, reject) => {
             this.db.query(sql, (err, result) => {
                 if (err) {
                     reject(err)
@@ -15,11 +23,14 @@ class EmployeeDB {
                 }
             });
         })
+
+        this.render(departments)
+        this.mainMenu()
     }
 
     addDepartment(department) {
         const SQL = 'INSERT INTO department SET ?'
-        console.log(department)
+
         return new Promise((resolve, reject) => {
             this.db.query(SQL, {name: department.departmentName}, (err, result) => {
                 if (err) {
@@ -31,10 +42,10 @@ class EmployeeDB {
         })
     }
 
-    retrieveEmployee() {
+    retrieveEmployees = async () => {
         const sql = "SELECT CONCAT('first_name', 'last_name') AS Employee FROM employee"
         
-        return new Promise((res, rej) => {
+        const employees = await new Promise((res, rej) => {
             this.db.query(sql, (err, result) => {
                 if (err) {
                     rej(err)
@@ -43,12 +54,14 @@ class EmployeeDB {
                 res(result)
             })
         })
+        this.render(employees)
+        this.mainMenu()
     }
 
-    retrieveRole() {
-        const sql = "SELECT * FROM role"
+    retrieveRoles = async () => {
+        const sql = "SELECT title, salary FROM role"
 
-        return new Promise((res, rej) => {
+        const roles = await new Promise((res, rej) => {
             this.db.query(sql, (err, result) => {
                 if (err) {
                     rej(err)
@@ -57,6 +70,9 @@ class EmployeeDB {
                 res(result)
             })
         })
+
+        this.render(roles)
+        this.mainMenu()
     }
 
     addRole(role) {
