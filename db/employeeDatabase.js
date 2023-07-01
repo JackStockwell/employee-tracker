@@ -5,16 +5,10 @@ class EmployeeDB {
         this.db = db;
     }
 
-    render(data) {
-        console.log('\n')
-        console.table(data)
-        console.log('\n')
-    } 
-
     retrieveDepartments = async () => {    
         const sql = "SELECT * FROM department;"  
 
-        const departments = await new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             this.db.query(sql, (err, result) => {
                 if (err) {
                     reject(err)
@@ -23,9 +17,6 @@ class EmployeeDB {
                 }
             });
         })
-
-        this.render(departments)
-        this.mainMenu()
     }
 
     addDepartment(department) {
@@ -54,8 +45,6 @@ class EmployeeDB {
                 res(result)
             })
         })
-        this.render(employees)
-        this.mainMenu()
     }
 
     retrieveRoles = async () => {
@@ -70,9 +59,6 @@ class EmployeeDB {
                 res(result)
             })
         })
-
-        this.render(roles)
-        this.mainMenu()
     }
 
     addRole(role) {
