@@ -58,11 +58,15 @@ class EmployeeDB {
     }
 
     addEmployee(employee) {
+
+        // SQL String for inserting the new employee
         const SQL = `
         INSERT INTO employee SET ? 
         `
+        // Deconstruct the object
         const {empNameFirst, empNameLast, empRole, empManager} = employee
         
+        // New promise, adds the new employee with the paramaters parsed.
         return new Promise((res, rej) => {
             this.db.query(SQL, {first_name:empNameFirst, last_name:empNameLast, role_id:empRole, manager_id:empManager}, (err, result) => {
                 if (err) {
@@ -71,6 +75,8 @@ class EmployeeDB {
                 res(`'${empNameFirst} ${empNameLast}' has been added to the Database!`)
             })
         })
+
+        
     }
 
     retrieveRoles = async () => {
@@ -109,11 +115,12 @@ class EmployeeDB {
     }
 
     updateEmployeeRole(update) {
-        console.log(update)
 
         const { newRole, updatedEmployee} = update
 
-        const SQL = `UPDATE employee SET employee.role_id=${newRole} WHERE employee.id=${updatedEmployee}`
+        const SQL = `
+        UPDATE employee SET employee.role_id=${newRole} WHERE employee.id=${updatedEmployee}
+        `
         
         return new Promise((resolve, reject) => {
             this.db.query(`UPDATE employee SET employee.role_id=? WHERE employee.id=?`, [newRole, updatedEmployee], (err, result) => {
@@ -124,7 +131,44 @@ class EmployeeDB {
             })
         })
 
+        
+
     }
+
+    updateToManager(manager) {
+        const SQL = `
+        UPDATE employee SET employee.is_manager=1 WHERE employee.id=?
+        `
+
+        this.db.query(SQL, [manager.empManager], (err, result) => {
+            if (err) {
+                console.log(err)
+            }
+        })
+    }
+
+    retrieveManagers = async () => {
+        const SQL = `
+        SELECT 	
+            employee.id, 
+            CONCAT(employee.first_name, ' ', employee.last_name) AS Name, 
+            role.title AS Title, 
+            role.salary as Salary, 
+            department.name as Department
+        FROM employee
+            INNER join role ON employee.role_id = role.id
+            INNER join department ON role.department_id = department.id
+        WHERE employee.is_manager=1
+        `
+        return new Promise((res, rej) => {
+            this.db.query(SQL, (err, result) => {
+                if (err) {
+                    rej(err)
+                }
+                res(result)
+            })
+        })
+    } 
 
 }
 

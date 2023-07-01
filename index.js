@@ -8,6 +8,8 @@ require('dotenv').config();
 const db = mysql.createConnection(
     {
         host: 'localhost',
+        // .env for security reasons
+        // Follow the README for guidance on how to use.
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
