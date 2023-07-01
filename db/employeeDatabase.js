@@ -6,7 +6,7 @@ class EmployeeDB {
     }
 
     retrieveDepartments = async () => {    
-        const sql = "SELECT department.name FROM department;"  
+        const sql = "SELECT department.id, department.name FROM department;"  
 
         return new Promise((resolve, reject) => {
             this.db.query(sql, (err, result) => {
@@ -94,8 +94,11 @@ class EmployeeDB {
 
     addRole(role) {
         const SQL = 'INSERT INTO role SET ?'
+
+        const {roleName, roleSalary, roleDepartment} = role;
+
         return new Promise((resolve, reject) => {
-            this.db.query(SQL, {title: role.name, salary: role.salary, department_id: role.id }, (err, result) => {
+            this.db.query(SQL, {title: roleName, salary: roleSalary, department_id: roleDepartment }, (err, result) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -104,6 +107,16 @@ class EmployeeDB {
             })
         })
     }
+
+    updateEmployeeRole(update) {
+
+        const { updatedEmployee, newRole } = update
+
+        const SQL = `
+        UPDATE employee SET employee.role_id=${newRole} WHERE employee.id=${updatedEmployee}
+        `
+    }
+
 }
 
 module.exports = Database = { 
