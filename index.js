@@ -17,6 +17,8 @@ const db = mysql.createConnection(
     console.log("Connected to Database")
 )
 
+// Creates a new instance of the CLI class with the database parsed in.
 const cli = new CLI(db);
 
+// Calls the main menu, which starts the application.
 cli.mainMenu();
