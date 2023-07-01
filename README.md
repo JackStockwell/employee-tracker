@@ -7,6 +7,10 @@
 ](https://www.npmjs.com/package/mysql)
 [![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FJackStockwell%2Femployee-tracker%2Fmain%2Fpackage.json&query=%24.dependencies.dotenv&label=dotenv)](https://www.npmjs.com/package/dotenv)
 
+## Screenshot
+
+![Gif of the app being used.](./assets/example.gif)
+
 ## Description
 
 Track your employees across your business!
@@ -104,6 +108,12 @@ source db/seeds.sql
 
 This will populate the sql database with a placeholder employee.
 
+```sh
+quit;
+```
+
+To leave SQL.
+
 ### Running the application
 
 The below will run the application!
@@ -116,9 +126,14 @@ You're free to navigate the menus, call upon the above to start the application 
 
 ## License
 
+[![GitHub](https://img.shields.io/github/license/JackStockwell/employee-tracker)](https://unlicense.org/)
+
+Infomation on the Unlince can be found [here](https://unlicense.org/)
 
 
 ## Credits
 
 [Stack overflow on creating table alias](https://stackoverflow.com/questions/3263935/multiple-alias-names-for-a-table) - Used to create an alias of employee table to join it to itself.
+
+[W3Schools for SQL](https://www.w3schools.com/sql/sql_join_inner.asp) - Refrenced continuously throughout for SQL knowledge.
 
