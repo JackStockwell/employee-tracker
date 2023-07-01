@@ -34,13 +34,17 @@ class EmployeeDB {
     }
 
     retrieveEmployees = async () => {
-        const sql = "SELECT CONCAT('first_name', 'last_name') AS Employee FROM employee"
+        const sql = `
+        SELECT employee.id, CONCAT(first_name, ' ', last_name) AS Name, role.title AS Role, role.salary as Salary, department.name as Department, employee.manager_id as Manager
+        FROM ((employee
+        LEFT join role ON employee.role_id = role.id)
+        LEFT join department ON role.department_id = department_id);
+        `
         
         return new Promise((res, rej) => {
             this.db.query(sql, (err, result) => {
                 if (err) {
                     rej(err)
-                    return
                 }
                 res(result)
             })
@@ -48,7 +52,12 @@ class EmployeeDB {
     }
 
     retrieveRoles = async () => {
-        const sql = "SELECT title, salary FROM role"
+        const sql = `
+        SELECT role.id, role.title, role.salary, department.name
+        FROM role
+        LEFT JOIN department 
+        ON role.department_id = department.id;
+        `
 
         return new Promise((res, rej) => {
             this.db.query(sql, (err, result) => {
