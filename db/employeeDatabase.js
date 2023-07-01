@@ -36,7 +36,7 @@ class EmployeeDB {
     retrieveEmployees = async () => {
         const sql = "SELECT CONCAT('first_name', 'last_name') AS Employee FROM employee"
         
-        const employees = await new Promise((res, rej) => {
+        return new Promise((res, rej) => {
             this.db.query(sql, (err, result) => {
                 if (err) {
                     rej(err)
@@ -50,7 +50,7 @@ class EmployeeDB {
     retrieveRoles = async () => {
         const sql = "SELECT title, salary FROM role"
 
-        const roles = await new Promise((res, rej) => {
+        return new Promise((res, rej) => {
             this.db.query(sql, (err, result) => {
                 if (err) {
                     rej(err)
