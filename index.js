@@ -1,7 +1,10 @@
+// Imports
+
 const CLI = require('./lib/cli.js');
 const mysql = require('mysql2');
 require('dotenv').config();
 
+// SQL database connection, carried on throughout the class.
 const db = mysql.createConnection(
     {
         host: 'localhost',

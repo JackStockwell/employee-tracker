@@ -116,10 +116,10 @@ class EmployeeDB {
         const SQL = `UPDATE employee SET employee.role_id=${newRole} WHERE employee.id=${updatedEmployee}`
         
         return new Promise((resolve, reject) => {
-            this.db.query(`UPDATE employee SET employee.role_id=? WHERE employee.id=?`, {newRole, updatedEmployee}, (err, result) => {
+            this.db.query(`UPDATE employee SET employee.role_id=? WHERE employee.id=?`, [newRole, updatedEmployee], (err, result) => {
                 if (err) {
                     reject(err)
-                }`  `
+                }
                 resolve("Update successful!")
             })
         })
@@ -128,6 +128,4 @@ class EmployeeDB {
 
 }
 
-module.exports = Database = { 
-    EmployeeDB
-};
+module.exports = EmployeeDB;
