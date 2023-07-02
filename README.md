@@ -33,7 +33,7 @@ I learnt a great deal on mySQL and to dynamically create inquirer prompt choices
 
 ## Installation 
 
-I would recommend watching my full guide [here]() for a more streamlined experience. If not, see below.
+I would recommend watching my full guide [here](https://drive.google.com/file/d/11zh-B8q9UTfiExmzXLEqcNJKY-4e4-oY/view) for a more streamlined experience. If not, see below.
 
 ### Written Tutorial
 
