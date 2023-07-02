@@ -45,7 +45,7 @@ class EmployeeDB {
             employee.id, 
             CONCAT(employee.first_name, ' ', employee.last_name) AS Name, 
             role.title AS Title, 
-            role.salary as Salary, 
+            CONCAT ('£', role.salary) as Salary, 
             department.name as Department,
             CONCAT(m.first_name, ' ', m.last_name) as Manager
         FROM employee
@@ -88,7 +88,9 @@ class EmployeeDB {
     retrieveRoles = async () => {
         // Retrieves the neccessary role data to display to the user. Also retrieves the department from the department table.
         const sql = `
-        SELECT role.id, role.title, role.salary, department.name
+        SELECT role.id, role.title AS Title,
+        CONCAT ('£', role.salary) as Salary,
+        department.name as Department
         FROM role
         INNER JOIN department 
         ON role.department_id = department.id;
@@ -164,7 +166,7 @@ class EmployeeDB {
             employee.id, 
             CONCAT(employee.first_name, ' ', employee.last_name) AS Name, 
             role.title AS Title, 
-            role.salary as Salary, 
+            CONCAT ('£', role.salary) as Salary, 
             department.name as Department
         FROM employee
             INNER join role ON employee.role_id = role.id
