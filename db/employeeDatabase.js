@@ -180,7 +180,19 @@ class EmployeeDB {
                 res(result)
             })
         })
-    } 
+    }
+
+    delete(table) {
+
+        console.log(table)
+
+
+        const SQL = `
+        DELETE from ?
+        WHERE 
+        
+        `
+    }
 
 }
 
