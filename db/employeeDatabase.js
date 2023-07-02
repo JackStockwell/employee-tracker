@@ -129,11 +129,11 @@ class EmployeeDB {
         const { newRole, updatedEmployee} = employee
         // SQL string that sets the role of the corresponding ID where it matches the Employee ID.
         const SQL = `
-        UPDATE employee SET employee.role_id=${newRole} WHERE employee.id=${updatedEmployee}
+        UPDATE employee SET employee.role_id=? WHERE employee.id=?
         `
         
         return new Promise((resolve, reject) => {
-            this.db.query(`UPDATE employee SET employee.role_id=? WHERE employee.id=?`, [newRole, updatedEmployee], (err, result) => {
+            this.db.query(SQL, [newRole, updatedEmployee], (err, result) => {
                 if (err) {
                     reject(err)
                 }
@@ -182,16 +182,25 @@ class EmployeeDB {
         })
     }
 
-    delete(table) {
+    delete(table, data) {
 
-        console.log(table)
+        console.log(table, data)
+        const tableData = {
+            table: table,
+            id: data.id
+        }
 
+        const SQL = `SELECT * from ${tableData.table} WHERE ${tableData.table}.id=${tableData.id}`
 
-        const SQL = `
-        DELETE from ?
-        WHERE 
+        return new Promise((resolve, reject) => {
+            this.db.query(SQL, (err, result) => {
+                if (err) {
+                    reject(err)
+                }
+                resolve("Deletion ")
+            })
+        })
         
-        `
     }
 
 }
