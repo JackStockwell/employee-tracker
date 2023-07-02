@@ -182,16 +182,19 @@ class EmployeeDB {
         })
     }
 
+    // Delete func, takes the table and ID of what needs to be deleted.
     delete(table, data) {
 
-        console.log(table, data)
+        // New object to make it easier to read.
         const tableData = {
             table: table,
             id: data.id
         }
 
+        // SQL testring with the template lateral parsed of what needs to deleted from what table.
         const SQL = `DELETE from ${tableData.table} WHERE ${tableData.table}.id=${tableData.id}`
 
+        // Runs the SQL query.
         return new Promise((resolve, reject) => {
             this.db.query(SQL, (err, result) => {
                 if (err) {
