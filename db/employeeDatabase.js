@@ -190,14 +190,14 @@ class EmployeeDB {
             id: data.id
         }
 
-        const SQL = `SELECT * from ${tableData.table} WHERE ${tableData.table}.id=${tableData.id}`
+        const SQL = `DELETE from ${tableData.table} WHERE ${tableData.table}.id=${tableData.id}`
 
         return new Promise((resolve, reject) => {
             this.db.query(SQL, (err, result) => {
                 if (err) {
                     reject(err)
                 }
-                resolve("Deletion ")
+                resolve("Deletion successful!")
             })
         })
         
